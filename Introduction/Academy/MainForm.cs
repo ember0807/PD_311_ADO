@@ -130,7 +130,6 @@ namespace Academy
 
 		private void dataGridViewGroups_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
 		{
-			Group group = new Group((sender as DataGridView).SelectedRows[0]);
 			//group.ID = Convert.ToInt32((sender as DataGridView).SelectedRows[0].Cells[0].Value);
 			//group.GroupName = (sender as DataGridView).SelectedRows[0].Cells[1].Value.ToString();
 			//group.StartDate = Convert.ToDateTime((sender as DataGridView).SelectedRows[0].Cells[2].Value);
@@ -138,10 +137,24 @@ namespace Academy
 			//group.Direction = Connector.Directions[(sender as DataGridView).SelectedRows[0].Cells[4].Value.ToString()];
 			//group.LearningForm = Connector.LearningForms[(sender as DataGridView).SelectedRows[0].Cells[5].Value.ToString()];
 			//group.LearningDays = Convert.ToByte((sender as DataGridView).SelectedRows[0].Cells[6].Value);
-
+			Group group = new Group((sender as DataGridView).SelectedRows[0]);
 			addGroup.Init(group);
+			if (addGroup.ShowDialog() == DialogResult.OK)
+			{
 
-			addGroup.ShowDialog();
+				int index = dataGridViewGroups.SelectedRows[0].Index;
+				//dataGridViewGroups.Rows.Insert(index,);
+				//dataGridViewGroups.Rows.RemoveAt(index);
+				//Connector.UpgradeGroup(group);
+				//dataGridViewGroups.SelectedRows. =
+				//	Connector.UpgradeGroup(group);
+				//DataTable table = Connector.UpgradeGroup(group);
+				//dataGridViewGroups.Rows[index].SetValues(new object)
+				//TODO UpgradeGroup
+				Connector.UpgradeGroup(group);
+			}
+
+			//addGroup.ShowDialog();
 		}
 	}
 }
