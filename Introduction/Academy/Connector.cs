@@ -18,6 +18,7 @@ namespace Academy
 		public static Dictionary<string, int> Directions;
 		static Connector()
 		{
+            Console.WriteLine(connectionString);
 			//connectionString = ConfigurationManager.ConnectionStrings["Academy_PD_311"].ConnectionString;
 			connection = new SqlConnection(connectionString);
 

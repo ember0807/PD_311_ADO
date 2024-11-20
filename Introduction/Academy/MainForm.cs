@@ -16,11 +16,11 @@ namespace Academy
 		AddGroupForm addGroup;
 		public MainForm()
 		{
+			AllocConsole();
 			InitializeComponent();
 			LoadStudents();
 			LoadGroups();
 			addGroup = new AddGroupForm();
-			AllocConsole();
 		}
 		void LoadStudents()
 		{
@@ -30,6 +30,16 @@ namespace Academy
 					"student_id, last_name, first_name, middle_name, birth_date, group_name, direction_name", 
 					"Students, Groups, Directions",
 					"[group]=group_id AND direction=direction_id");
+			comboBoxStudentsGroup.DataSource = Connector.Select("*", "Groups");
+			comboBoxStudentsGroup.DisplayMember = "group_name";
+			comboBoxStudentsGroup.SelectedIndex = -1;
+			comboBoxStudentsGroup.ValueMember = "group_id";
+
+			comboBoxStudentsDirection.DataSource = Connector.Select("*", "Directions");
+			comboBoxStudentsDirection.DisplayMember = "direction_name";
+			comboBoxStudentsDirection.SelectedIndex = -1;
+			comboBoxStudentsDirection.ValueMember = "direction_id";
+
 		}
 		void LoadGroups()
 		{
@@ -49,6 +59,11 @@ namespace Academy
 
 			//comboBoxGroupDirection.Items.AddRange(Connector.Select("direction_name", "Directions").Rows.Cast<String>().ToArray());
 			comboBoxGroupDirection.Items.AddRange(Connector.SelectColumn("direction_name", "Directions").ToArray());
+			for (int i = 0; i < dataGridViewGroups.RowCount; i++)
+			{
+				dataGridViewGroups.Rows[i].Cells["learning_days"].Value =
+				Week.ExtractDaysToString(Convert.ToByte(dataGridViewGroups.Rows[i].Cells["learning_days"].Value));
+			}
 		}
 		void SetStatusBarText(object sender, EventArgs e)
 		{
