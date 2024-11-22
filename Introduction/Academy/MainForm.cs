@@ -151,7 +151,9 @@ namespace Academy
 				//DataTable table = Connector.UpgradeGroup(group);
 				//dataGridViewGroups.Rows[index].SetValues(new object)
 				//TODO UpgradeGroup
-				Connector.UpgradeGroup(group);
+				//Connector.UpgradeGroup(group);
+				//group = addGroup.Group;
+				dataGridViewGroups.Rows[index].SetValues(Connector.UpgradeGroup(new Group(addGroup.Group)));
 			}
 
 			//addGroup.ShowDialog();
